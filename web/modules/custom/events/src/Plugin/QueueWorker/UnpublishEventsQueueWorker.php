@@ -7,8 +7,6 @@ use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
-use Drupal\events\Services\EventsHandlerService;
-use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -30,7 +28,7 @@ class UnpublishEventsQueueWorker extends QueueWorkerBase implements ContainerFac
   protected $entityTypeManager;
 
   /**
-   * Constructs a new RelatedEventsBlock instance.
+   * Constructs a new Queueworker.
    *
    * @param array $configuration
    *   The plugin configuration, i.e. an array with configuration values keyed
@@ -60,6 +58,10 @@ class UnpublishEventsQueueWorker extends QueueWorkerBase implements ContainerFac
       $container->get('entity_type.manager')
     );
   }
+
+  /**
+   * {@inheritdoc}
+   */
   public function processItem($data)
   {
     try{
