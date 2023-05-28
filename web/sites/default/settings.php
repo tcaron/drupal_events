@@ -756,14 +756,4 @@ if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include $app_root . '/' . $site_path . '/settings.local.php';
 }
 
-  $databases['default']['default'] = [
-    'database' => 'test',
-    'username' => 'root',
-    'password' => '',
-    'host' => 'localhost',
-    'port' => '3306',
-    'driver' => 'mysql',
-    'prefix' => '',
-    'collation' => 'utf8mb4_general_ci',
-  ];
 $settings['config_sync_directory'] = '../config/sync';
