@@ -22,8 +22,23 @@ interface EventsHandlerServiceInterface
   public function getRelatedEventsMainQuery(string $endDate): QueryInterface;
 
   /**
+   * Get the second query, based on the main query when the main return less than 3 results
+   * @param string $endDate
+   * @param array $previousResult
+   * @param array $nids
+   * @return array|null
+   */
+  public function getRelatedEventsSecondQuery(string $endDate, array $previousResult, array $nids): ?array;
+
+  /**
    * get events to unpublish
    * @return array|null
    */
   public function getEventstoUnpublish(): ?array;
+
+  /**
+   * return the now datetime well formatted for entity query
+   * @return string
+   */
+  public function getFormattedDateTimeNow(): string;
 }
