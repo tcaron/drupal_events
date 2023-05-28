@@ -1,0 +1,3 @@
+services:
+  events.events_handler_service:
+    class: \Drupal\events\Services\EventsHandlerService

@@ -1,0 +1,5 @@
+name: Events module
+description: Events content type handler
+type: module
+core: 10.x
+core_version_requirement: ^9 || ^10

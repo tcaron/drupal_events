@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function events_theme() {
+  return [
+    'related_events_block' => [
+      'variables' => [
+        'content' => NULL,
+        'title' => NULL
+      ]
+    ]
+  ];
+}
+
+/**
+ * Implements hook_cron().
+ */
+function events_cron(){
+  /** @var \Drupal\events\Services\EventsHandlerService $service */
+  if ($service = \Drupal::service('events.events_handler_service')) {
+    if ($events = $service->getEventstoUnpublish()){
+      $queue = \Drupal::queue('events_unpublish_events_queue_worker');
+      $queue->createQueue();
+      foreach ($events as $event){
+        $queue->createItem([
+          'nid' => $event,
+        ]);
+      }
+    }
+  }
+}

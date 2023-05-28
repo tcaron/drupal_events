@@ -1,0 +1,28 @@
+uuid: 1e3913ac-2c64-4618-a2f4-d95598cdc18a
+langcode: fr
+status: true
+dependencies:
+  module:
+    - events
+    - node
+  theme:
+    - test_drupal
+id: relatedevents
+theme: test_drupal
+region: content
+weight: 0
+provider: null
+plugin: events_related_block
+settings:
+  id: events_related_block
+  label: 'Related Events'
+  label_display: '0'
+  provider: events
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      event: event

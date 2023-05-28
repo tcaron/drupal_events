@@ -1,0 +1,59 @@
+uuid: 03331479-aee4-4c83-95e5-7ad42584cad2
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.related_block
+    - field.field.node.event.body
+    - field.field.node.event.field_date_range
+    - field.field.node.event.field_event_type
+    - field.field.node.event.field_image
+    - field.field.node.event.field_string_long
+    - node.type.event
+  module:
+    - datetime_range
+    - image
+    - user
+id: node.event.related_block
+targetEntityType: node
+bundle: event
+mode: related_block
+content:
+  field_date_range:
+    type: daterange_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+      separator: '-'
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_event_type:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_image:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  field_string_long: true
+  langcode: true

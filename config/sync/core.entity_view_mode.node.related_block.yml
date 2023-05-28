@@ -1,0 +1,10 @@
+uuid: a935aabb-36c9-42e6-bb18-51cae47a9e93
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: node.related_block
+label: 'Related block'
+targetEntityType: node
+cache: true
