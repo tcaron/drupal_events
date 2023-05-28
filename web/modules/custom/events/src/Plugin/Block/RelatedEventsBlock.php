@@ -83,17 +83,21 @@ class RelatedEventsBlock extends BlockBase implements ContainerFactoryPluginInte
       $nid = $node->id();
       $type = $node->get('field_event_type')->getString();
       if ($events = $this->getRelatedEventsToDisplay($nid,$type)) {
-        $build['events'] = [
+        $build = [
           '#theme' => 'related_events_block',
           '#title' => $this->t('Related events'),
           '#content' => $this->renderEntities($events)
         ];
-        $build['#cache'] = [
-          'tags' => ["nid:{$nid}","eventType:{$type}"]
-        ];
       }
     }
     return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheContexts() {
+    return ['url.path'];
   }
 
   /**
@@ -107,7 +111,13 @@ class RelatedEventsBlock extends BlockBase implements ContainerFactoryPluginInte
       try{
         $storage = $this->entityTypeManager->getStorage('node');
         if ($storage) {
-          return $storage->loadMultiple($events);
+          $nodes = $storage->loadMultiple($events);
+          //add manual sorting in case of main query give less than 3 records
+          usort($nodes,function($a,$b){
+            //sorting on the begin date
+            return strtotime($a->get('field_date_range')->getValue()[0]['value']) - strtotime($b->get('field_date_range')->getValue()[0]['value']);
+          });
+          return $nodes;
         }
       } catch (InvalidPluginDefinitionException $e) {
         return NULL;
